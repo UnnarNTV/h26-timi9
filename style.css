@@ -1,0 +1,66 @@
+/* Sameiginlegt útlit fyrir allar síður í tímanum */
+body {
+  font-family: system-ui, Arial, sans-serif;
+  max-width: 760px;
+  margin: 40px auto;
+  padding: 0 16px;
+  background: #f6f4ee;
+  color: #1c2230;
+  line-height: 1.5;
+}
+section {
+  background: #fff;
+  border: 1px solid #e2ded3;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+h2 {
+  margin-top: 0;
+}
+a {
+  color: #2a5db8;
+}
+button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #2a5db8;
+  color: white;
+  cursor: pointer;
+  margin: 4px 4px 4px 0;
+}
+button:hover {
+  background: #1d4690;
+}
+input {
+  padding: 7px 10px;
+  border: 1px solid #c9c4b8;
+  border-radius: 6px;
+}
+.output {
+  background: #f4f2ec;
+  padding: 10px 12px;
+  border-radius: 6px;
+  min-height: 24px;
+}
+code,
+pre {
+  background: #1e2433;
+  color: #e6e9ef;
+  border-radius: 6px;
+}
+code {
+  padding: 1px 5px;
+}
+pre {
+  padding: 12px 16px;
+  overflow-x: auto;
+}
+.merki {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #b85a12;
+}

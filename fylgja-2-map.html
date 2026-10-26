@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="is">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fylgið mér 2 – forEach &amp; map</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <p><a href="index.html">← Allar skrár</a></p>
+    <h1>Fylgið mér 2: forEach &amp; map</h1>
+    <p>
+      Kóðinn fer í <code>js/fylgja-2-map.js</code>. Hafið console opna
+      (F12 / Cmd + Option + I).
+    </p>
+
+    <section>
+      <span class="merki">ÆFING 1</span>
+      <h2>forEach: hvert dýr í console</h2>
+      <pre>const dyr = ["köttur", "hundur", "hestur"];</pre>
+      <button onclick="aefing1()">Keyra</button>
+      <p class="output" id="svar1"></p>
+    </section>
+
+    <section>
+      <span class="merki">ÆFING 2</span>
+      <h2>forEach með index</h2>
+      <p>Búðu til númeraðan lista: 1. köttur, 2. hundur ...</p>
+      <button onclick="aefing2()">Keyra</button>
+      <p class="output" id="svar2"></p>
+    </section>
+
+    <section>
+      <span class="merki">ÆFING 3</span>
+      <h2>map: tvöfalda tölur</h2>
+      <pre>const tolur = [1, 2, 3, 4];</pre>
+      <button onclick="aefing3()">Tvöfalda</button>
+      <p class="output" id="svar3"></p>
+    </section>
+
+    <section>
+      <span class="merki">ÆFING 4</span>
+      <h2>map: allt í hástöfum</h2>
+      <p>Vísbending: <code>"köttur".toUpperCase()</code> gefur <code>"KÖTTUR"</code></p>
+      <button onclick="aefing4()">HÁSTAFIR</button>
+      <p class="output" id="svar4"></p>
+    </section>
+
+    <section>
+      <span class="merki">ÆFING 5</span>
+      <h2>Algeng villa: { } án return</h2>
+      <pre>const verd = [1000, 2000, 3500];</pre>
+      <button onclick="aefing5Villa()">Með villu</button>
+      <button onclick="aefing5Lagad()">Lagað</button>
+      <p class="output" id="svar5"></p>
+    </section>
+
+    <section>
+      <span class="merki">ÆFING 6</span>
+      <h2>map + join: listi á síðuna</h2>
+      <button onclick="aefing6()">Sýna lista</button>
+      <ul id="svar6"></ul>
+    </section>
+
+    <section>
+      <span class="merki">ÆFING 7</span>
+      <h2>map á objects</h2>
+      <pre>const vorur = [
+  { nafn: "Mjólk", verd: 229 },
+  { nafn: "Brauð", verd: 649 },
+  { nafn: "Ostur", verd: 1890 },
+];</pre>
+      <button onclick="aefing7()">Bara nöfnin</button>
+      <p class="output" id="svar7"></p>
+    </section>
+
+    <script src="js/fylgja-2-map.js"></script>
+  </body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="is">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tímaverkefni – Arrays, map, filter & reduce (lausn)</title>
+    <style>
+      body {
+        font-family: system-ui, Arial, sans-serif;
+        max-width: 760px;
+        margin: 40px auto;
+        padding: 0 16px;
+        background: #f6f4ee;
+        color: #1c2230;
+        line-height: 1.5;
+      }
+      section {
+        background: #fff;
+        border: 1px solid #e2ded3;
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin-bottom: 24px;
+      }
+      h2 {
+        margin-top: 0;
+      }
+      button {
+        padding: 8px 14px;
+        border: none;
+        border-radius: 6px;
+        background: #2a5db8;
+        color: white;
+        cursor: pointer;
+        margin: 4px 4px 4px 0;
+      }
+      button:hover {
+        background: #1d4690;
+      }
+      input {
+        padding: 7px 10px;
+        border: 1px solid #c9c4b8;
+        border-radius: 6px;
+      }
+      .output {
+        background: #f4f2ec;
+        padding: 10px 12px;
+        border-radius: 6px;
+        min-height: 24px;
+      }
+      code,
+      pre {
+        background: #1e2433;
+        color: #e6e9ef;
+        border-radius: 6px;
+      }
+      code {
+        padding: 1px 5px;
+      }
+      pre {
+        padding: 12px 16px;
+        overflow-x: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Tímaverkefni: Arrays, map, filter & reduce <small style="color:#b85a12">– lausn</small></h1>
+    <p>
+      Nú vinnið þið sjálf. Allt HTML er tilbúið, þið skrifið JavaScript-ið þar
+      sem stendur <b>TODO</b>. Verkefni 1–6 eru grunnurinn, 7 er aukaáskorun.
+      Reynið að nota <code>map</code>, <code>filter</code> og
+      <code>reduce</code> í stað <code>for</code>-loopu þar sem það passar.
+    </p>
+    <p>
+      <b>Festist þú?</b> 1. Lestu villuna í console. 2. Bættu við
+      <code>console.log()</code> til að sjá gildin. 3. Spurðu sessunautinn. 4.
+      Réttu upp hönd.
+    </p>
+
+    <!-- Verkefni 1 -->
+    <section>
+      <h2>Verkefni 1: Nafnalisti</h2>
+      <p>
+        Skrifaðu nafn og smelltu á „Bæta við“. „Fjarlægja síðasta“ tekur
+        síðasta nafnið af listanum. Sama nafn má ekki koma tvisvar.
+      </p>
+      <input type="text" id="nafnInput" placeholder="t.d. Anna" />
+      <button onclick="baetaVidNafni()">Bæta við</button>
+      <button onclick="fjarlaegjaSidasta()">Fjarlægja síðasta</button>
+      <p class="output" id="verkefni1"></p>
+
+      <script>
+        const nofn = ["Anna", "Jón", "Sigga"];
+
+        // TODO 1: Skrifaðu function synaNofn() sem birtir í verkefni1:
+        // - öll nöfnin aðskilin með kommu (vísbending: nofn.join(", "))
+        // - fjölda nafna (nofn.length)
+        // - fyrsta nafnið og síðasta nafnið (munið: síðasta er nofn[nofn.length - 1])
+        // Dæmi: "Anna, Jón, Sigga<br>Fjöldi: 3<br>Fyrst: Anna · Síðast: Sigga"
+        function synaNofn() {
+          document.getElementById("verkefni1").innerHTML =
+            nofn.join(", ") +
+            "<br>Fjöldi: " + nofn.length +
+            "<br>Fyrst: " + nofn[0] + " · Síðast: " + nofn[nofn.length - 1];
+        }
+
+        // TODO 2: Skrifaðu function baetaVidNafni() sem:
+        // - sækir nafnið úr nafnInput
+        // - ef nafnið er nú þegar í fylkinu (nofn.includes(nafn)): gerir ekkert (return)
+        // - annars: push-ar því í fylkið, tæmir input-ið og kallar á synaNofn()
+        function baetaVidNafni() {
+          const nafn = document.getElementById("nafnInput").value;
+
+          if (nafn === "" || nofn.includes(nafn)) {
+            return; // tómt eða nú þegar á listanum
+          }
+
+          nofn.push(nafn);
+          document.getElementById("nafnInput").value = "";
+          synaNofn();
+        }
+
+        // TODO 3: Skrifaðu function fjarlaegjaSidasta() sem notar pop()
+        // og kallar svo á synaNofn().
+        // Bónus: hvað gerist þegar listinn er tómur? Birtu "Listinn er tómur".
+        function fjarlaegjaSidasta() {
+          nofn.pop();
+
+          if (nofn.length === 0) {
+            document.getElementById("verkefni1").innerHTML = "Listinn er tómur";
+          } else {
+            synaNofn();
+          }
+        }
+      </script>
+    </section>
+
+    <!-- Verkefni 2 -->
+    <section>
+      <h2>Verkefni 2: Verð með VSK</h2>
+      <p>Hér eru verð án virðisaukaskatts:</p>
+      <pre>const verdAnVsk = [1290, 450, 3990, 790, 2490];</pre>
+      <p>
+        Búðu til <b>nýtt</b> fylki með verðunum <b>með</b> 24% VSK og birtu það.
+        (Dæmi: 1000 → 1240)
+      </p>
+      <button onclick="synaVsk()">Reikna VSK</button>
+      <p class="output" id="verkefni2"></p>
+
+      <script>
+        const verdAnVsk = [1290, 450, 3990, 790, 2490];
+
+        // TODO 1: Skrifaðu ARROW function medVsk(verd) sem skilar verðinu * 1.24
+        // og rúnnar það: Math.round(...)
+        const medVsk = (verd) => Math.round(verd * 1.24);
+
+        // TODO 2: Skrifaðu function synaVsk() sem:
+        // - notar map() og medVsk til að búa til nýtt fylki: verdMedVsk
+        // - birtir bæði fylkin í verkefni2:
+        //   "Án VSK: 1290, 450, ...<br>Með VSK: 1600, 558, ..."
+        function synaVsk() {
+          const verdMedVsk = verdAnVsk.map(medVsk);
+
+          document.getElementById("verkefni2").innerHTML =
+            "Án VSK: " + verdAnVsk.join(", ") +
+            "<br>Með VSK: " + verdMedVsk.join(", ");
+        }
+
+        // SPURNING (svaraðu í athugasemd hér fyrir neðan):
+        // Breyttist upprunalega fylkið verdAnVsk þegar þú notaðir map()?
+        // Hvernig getur þú athugað það?
+        // SVAR: Nei. map() skilar NÝJU fylki og snertir ekki upprunalega
+        // fylkið. Það sést á því að "Án VSK" línan sýnir enn gömlu verðin,
+        // líka eftir að smellt er oft á takkann (eða með console.log(verdAnVsk)).
+      </script>
+    </section>
+
+    <!-- Verkefni 3 -->
+    <section>
+      <h2>Verkefni 3: Listi á síðuna</h2>
+      <p>Birtu borgirnar sem lista á síðunni:</p>
+      <pre>const borgir = ["Reykjavík", "Akureyri", "Ísafjörður", "Egilsstaðir", "Vestmannaeyjar"];</pre>
+      <button onclick="synaBorgir()">Sýna borgir</button>
+      <ul id="verkefni3"></ul>
+
+      <script>
+        const borgir = ["Reykjavík", "Akureyri", "Ísafjörður", "Egilsstaðir", "Vestmannaeyjar"];
+
+        // TODO: Skrifaðu function synaBorgir() sem:
+        // - notar map() til að breyta hverri borg í "<li>borg</li>"
+        // - notar join("") til að sameina allt í einn texta
+        // - setur textann í verkefni3
+        // Engin for-loopa í þetta skiptið!
+        // Bónus: map() gefur líka index sem annað gildi: (borg, i) => ...
+        //        Láttu listann birtast sem "1. Reykjavík", "2. Akureyri" ...
+        function synaBorgir() {
+          const html = borgir
+            .map((borg, i) => "<li>" + (i + 1) + ". " + borg + "</li>")
+            .join("");
+
+          document.getElementById("verkefni3").innerHTML = html;
+        }
+      </script>
+    </section>
+
+    <!-- Verkefni 4 -->
+    <section>
+      <h2>Verkefni 4: Sía tölur</h2>
+      <pre>const tolur = [12, 7, 58, 33, 90, 4, 61, 25, 76, 18];</pre>
+      <button onclick="synaAllar()">Allar</button>
+      <button onclick="synaSlettar()">Sléttar</button>
+      <button onclick="synaStorar()">Stærri en 50</button>
+      <p class="output" id="verkefni4"></p>
+
+      <script>
+        const tolur = [12, 7, 58, 33, 90, 4, 61, 25, 76, 18];
+
+        // TODO 1: Skrifaðu function birta(fylki) sem setur fylkið í verkefni4
+        // ásamt fjölda, t.d. "12, 58, 90, 4, 76, 18 (6 tölur)"
+        function birta(fylki) {
+          document.getElementById("verkefni4").innerHTML =
+            fylki.join(", ") + " (" + fylki.length + " tölur)";
+        }
+
+        // TODO 2: Skrifaðu þrjár functions sem kalla allar á birta():
+        // - synaAllar()   birtir öll tolur
+        // - synaSlettar() notar filter() til að halda bara sléttum tölum (tala % 2 === 0)
+        // - synaStorar()  notar filter() til að halda bara tölum stærri en 50
+        function synaAllar() {
+          birta(tolur);
+        }
+
+        function synaSlettar() {
+          birta(tolur.filter((tala) => tala % 2 === 0));
+        }
+
+        function synaStorar() {
+          birta(tolur.filter((tala) => tala > 50));
+        }
+
+        // Bónus: bættu við takka "Sléttar OG stærri en 50" sem notar tvo filter() í röð.
+      </script>
+    </section>
+
+    <!-- Verkefni 5 -->
+    <section>
+      <h2>Verkefni 5: Einkunnir</h2>
+      <pre>const einkunnir = [7.5, 9, 6, 8.5, 10, 5.5, 8];</pre>
+      <button onclick="synaEinkunnir()">Reikna</button>
+      <p class="output" id="verkefni5"></p>
+
+      <script>
+        const einkunnir = [7.5, 9, 6, 8.5, 10, 5.5, 8];
+
+        // TODO 1: Notaðu reduce() til að reikna summu einkunnanna.
+        // Munið upphafsgildið: .reduce((summa, e) => ..., 0)
+        const summaEinkunna = einkunnir.reduce((summa, e) => summa + e, 0);
+
+        // TODO 2: Skrifaðu function synaEinkunnir() sem birtir í verkefni5:
+        // - summuna
+        // - meðaleinkunn (summa / fjöldi), með 2 aukastöfum: medaltal.toFixed(2)
+        // - hversu margir náðu 7 eða meira (filter + length)
+        // Bónus: finndu hæstu einkunnina með reduce()
+        //        (vísbending: berðu saman hæsta hingað til og núverandi einkunn)
+        function synaEinkunnir() {
+          const medaltal = summaEinkunna / einkunnir.length;
+          const nadu = einkunnir.filter((e) => e >= 7).length;
+          const haest = einkunnir.reduce((max, e) => (e > max ? e : max), 0);
+
+          document.getElementById("verkefni5").innerHTML =
+            "Summa: " + summaEinkunna +
+            "<br>Meðaleinkunn: " + medaltal.toFixed(2) +
+            "<br>Fengu 7 eða meira: " + nadu + " af " + einkunnir.length +
+            "<br>Hæsta einkunn: " + haest;
+        }
+      </script>
+    </section>
+
+    <!-- Verkefni 6 -->
+    <section>
+      <h2>Verkefni 6: Vörulisti</h2>
+      <p>
+        Hér er fylki af <b>objects</b>. Hver vara hefur <code>nafn</code> og
+        <code>verd</code> (náið í með <code>vara.nafn</code> og
+        <code>vara.verd</code>).
+      </p>
+      <pre>const vorur = [
+  { nafn: "Mjólk", verd: 229 },
+  { nafn: "Brauð", verd: 649 },
+  { nafn: "Ostur", verd: 1890 },
+  { nafn: "Epli", verd: 399 },
+  { nafn: "Kaffi", verd: 1490 },
+  { nafn: "Súkkulaði", verd: 349 },
+];</pre>
+      <p>Sláðu inn hámarksverð. Sýndu bara vörur sem kosta það eða minna, og samtals verð þeirra.</p>
+      <input type="number" id="hamarkInput" placeholder="t.d. 500" />
+      <button onclick="siaVorur()">Sía</button>
+      <ul id="vorulisti"></ul>
+      <p class="output" id="verkefni6"></p>
+
+      <script>
+        const vorur = [
+          { nafn: "Mjólk", verd: 229 },
+          { nafn: "Brauð", verd: 649 },
+          { nafn: "Ostur", verd: 1890 },
+          { nafn: "Epli", verd: 399 },
+          { nafn: "Kaffi", verd: 1490 },
+          { nafn: "Súkkulaði", verd: 349 },
+        ];
+
+        // TODO: Skrifaðu function siaVorur() sem:
+        // 1. sækir hámarksverðið úr hamarkInput (munið Number())
+        // 2. filter():  heldur vörum þar sem vara.verd <= hámark
+        // 3. map() + join(""): býr til "<li>Mjólk – 229 kr.</li>" fyrir hverja vöru
+        //    og setur í vorulisti
+        // 4. reduce(): leggur saman verð síuðu varanna
+        //    og birtir "Samtals: 977 kr. (3 vörur)" í verkefni6
+        // Bónus: ef engin vara passar, birtu "Engin vara undir þessu verði".
+        function siaVorur() {
+          const hamark = Number(document.getElementById("hamarkInput").value);
+
+          const valdar = vorur.filter((vara) => vara.verd <= hamark);
+
+          document.getElementById("vorulisti").innerHTML = valdar
+            .map((vara) => "<li>" + vara.nafn + " – " + vara.verd + " kr.</li>")
+            .join("");
+
+          if (valdar.length === 0) {
+            document.getElementById("verkefni6").innerHTML =
+              "Engin vara undir þessu verði";
+            return;
+          }
+
+          const samtals = valdar.reduce((summa, vara) => summa + vara.verd, 0);
+
+          document.getElementById("verkefni6").innerHTML =
+            "Samtals: " + samtals + " kr. (" + valdar.length + " vörur)";
+        }
+      </script>
+    </section>
+
+    <!-- Verkefni 7 -->
+    <section>
+      <h2>Verkefni 7: Aukaáskorun 🌟 Orðagreining</h2>
+      <p>Skrifaðu setningu. Birtu síðan:</p>
+      <ul>
+        <li>hversu mörg orð eru í setningunni</li>
+        <li>lengsta orðið</li>
+        <li>öll orð sem eru lengri en 4 stafir, með HÁSTÖFUM</li>
+      </ul>
+      <p>
+        Vísbending: <code>"hæ hó jibbí".split(" ")</code> gefur fylkið
+        <code>["hæ", "hó", "jibbí"]</code>. Og <code>ord.toUpperCase()</code>
+        breytir orði í hástafi.
+      </p>
+      <input type="text" id="setningInput" placeholder="Sláðu inn setningu" size="40" />
+      <button onclick="greinaSetningu()">Greina</button>
+      <p class="output" id="verkefni7"></p>
+
+      <script>
+        // TODO: Skrifaðu function greinaSetningu()
+        // Hvaða aðferð passar fyrir hvern lið? split, filter, map, reduce?
+        // Passaðu: tvö bil í röð búa til tómt orð "". Hvernig losnar þú við það?
+        function greinaSetningu() {
+          const setning = document.getElementById("setningInput").value;
+
+          // filter fjarlægir tóm "orð" sem verða til við auka bil
+          const ord = setning.split(" ").filter((o) => o !== "");
+
+          if (ord.length === 0) {
+            document.getElementById("verkefni7").innerHTML = "Engin orð fundust";
+            return;
+          }
+
+          const lengst = ord.reduce(
+            (lengsta, o) => (o.length > lengsta.length ? o : lengsta),
+            ""
+          );
+
+          const longOrd = ord
+            .filter((o) => o.length > 4)
+            .map((o) => o.toUpperCase());
+
+          document.getElementById("verkefni7").innerHTML =
+            "Fjöldi orða: " + ord.length +
+            "<br>Lengsta orðið: " + lengst +
+            "<br>Löng orð: " + longOrd.join(", ");
+        }
+      </script>
+    </section>
+  </body>
+</html>

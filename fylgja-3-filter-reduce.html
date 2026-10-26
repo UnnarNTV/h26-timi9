@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="is">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fylgið mér 3 – filter, find &amp; reduce</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <p><a href="index.html">← Allar skrár</a></p>
+    <h1>Fylgið mér 3: filter, find &amp; reduce</h1>
+    <p>
+      Kóðinn fer í <code>js/fylgja-3-filter-reduce.js</code>. Hafið console
+      opna (F12 / Cmd + Option + I).
+    </p>
+
+    <section>
+      <span class="merki">ÆFING 1</span>
+      <h2>filter: dýrar vörur</h2>
+      <pre>const verd = [1290, 450, 3990, 790, 2490];</pre>
+      <p>Haltu bara verðum yfir 1000 kr.</p>
+      <button onclick="aefing1()">Sía</button>
+      <p class="output" id="svar1"></p>
+    </section>
+
+    <section>
+      <span class="merki">ÆFING 2</span>
+      <h2>filter: nöfn sem byrja á staf</h2>
+      <pre>const nofn = ["Sigga", "Jón", "Sara", "Anna", "Stefán", "Óli"];</pre>
+      <p>Vísbending: <code>"Sigga".startsWith("S")</code> er <code>true</code></p>
+      <input type="text" id="stafur2" placeholder="t.d. S" size="4" />
+      <button onclick="aefing2()">Sía</button>
+      <p class="output" id="svar2"></p>
+    </section>
+
+    <section>
+      <span class="merki">ÆFING 3</span>
+      <h2>find: leita að vöru</h2>
+      <p>Vörur: Mjólk, Brauð, Ostur, Epli, Kaffi, Súkkulaði</p>
+      <input type="text" id="leit3" placeholder="t.d. Ostur" />
+      <button onclick="aefing3()">Leita</button>
+      <p class="output" id="svar3"></p>
+    </section>
+
+    <section>
+      <span class="merki">ÆFING 4</span>
+      <h2>reduce: summa</h2>
+      <p>Leggðu saman öll verðin í <code>verd</code>. Skoðaðu console: hver umferð er skrifuð þar.</p>
+      <button onclick="aefing4()">Leggja saman</button>
+      <p class="output" id="svar4"></p>
+    </section>
+
+    <section>
+      <span class="merki">ÆFING 5</span>
+      <h2>reduce: telja stafi</h2>
+      <p>Hversu margir stafir eru í öllum nöfnunum samtals?</p>
+      <button onclick="aefing5()">Telja</button>
+      <p class="output" id="svar5"></p>
+    </section>
+
+    <section>
+      <span class="merki">ÆFING 6</span>
+      <h2>Keðja: filter → map → reduce</h2>
+      <p>Samtals verð allra vara sem kosta minna en 1000 kr. Sýnum hvert skref.</p>
+      <button onclick="aefing6()">Keyra keðjuna</button>
+      <p class="output" id="svar6"></p>
+    </section>
+
+    <section>
+      <span class="merki">ÆFING 7</span>
+      <h2>Spáðu fyrir: hvað skilar þetta?</h2>
+      <p>Skrifaðu niður svarið fyrst. Smelltu svo til að sjá hvort þú hafðir rétt.</p>
+      <pre>a)  [1, 2, 3].map((x) =&gt; x + 1)
+b)  [1, 2, 3].filter((x) =&gt; x &gt; 5)
+c)  [1, 2, 3].find((x) =&gt; x &gt; 5)
+d)  [1, 2, 3].reduce((s, x) =&gt; s + x, 10)
+e)  [1, 2, 3].forEach((x) =&gt; x * 2)</pre>
+      <button onclick="spa('a')">a</button>
+      <button onclick="spa('b')">b</button>
+      <button onclick="spa('c')">c</button>
+      <button onclick="spa('d')">d</button>
+      <button onclick="spa('e')">e</button>
+      <p class="output" id="svar7"></p>
+    </section>
+
+    <script src="js/fylgja-3-filter-reduce.js"></script>
+  </body>
+</html>
