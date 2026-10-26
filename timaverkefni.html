@@ -351,18 +351,22 @@ const vorur = [
           const hamarksVerd = Number(
             document.getElementById("hamarkInput").value,
           );
-          const htmlTexti = vorur
-            .filter((vara) => vara.verd <= hamarksVerd)
-            .map((vara) => `<li>${vara.nafn} - ${vara.verd} kr.</li>`)
-            .join("");
-          document.getElementById("vorulisti").innerHTML = htmlTexti;
-          const summaTexti =
-            "Samtals: " +
-            vorur
-              .filter((vara) => vara.verd <= hamarksVerd)
-              .reduce((samtals, vara) => samtals + vara.verd, 0) +
-            " kr.";
-          document.getElementById("verkefni6").innerHTML = summaTexti;
+          const siadarVorur = vorur.filter((vara) => vara.verd <= hamarksVerd);
+          if (siadarVorur.length > 0) {
+            const htmlTexti = siadarVorur
+              .map((vara) => `<li>${vara.nafn} - ${vara.verd} kr.</li>`)
+              .join("");
+            document.getElementById("vorulisti").innerHTML = htmlTexti;
+            const summaTexti =
+              "Samtals: " +
+              siadarVorur.reduce((samtals, vara) => samtals + vara.verd, 0) +
+              " kr.";
+            document.getElementById("verkefni6").innerHTML = summaTexti;
+          } else {
+            document.getElementById("vorulisti").innerHTML = "";
+            document.getElementById("verkefni6").innerHTML =
+              "Engin vara undir þessu verði";
+          }
         }
       </script>
     </section>
