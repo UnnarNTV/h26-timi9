@@ -398,6 +398,22 @@ const vorur = [
         // TODO: Skrifaðu function greinaSetningu()
         // Hvaða aðferð passar fyrir hvern lið? split, filter, map, reduce?
         // Passaðu: tvö bil í röð búa til tómt orð "". Hvernig losnar þú við það?
+        function greinaSetningu() {
+          const setning = document.getElementById("setningInput").value;
+          const ord = setning.split(" ").filter((o) => o != "");
+          const lengstaOrd = ord.reduce((lengst, o) => {
+            return lengst.length >= o.length ? lengst : o;
+          }, "");
+          const longOrdHastafir = ord
+            .filter((o) => o.length > 4)
+            .map((o) => o.toUpperCase());
+          const textiHTML = `
+            Fjöldi orða: ${ord.length}<br>
+            Lengsta orðið: ${lengstaOrd}<br>
+            Löng orð HRÓPUÐ: ${longOrdHastafir.join(", ")}
+          `;
+          document.getElementById("verkefni7").innerHTML = textiHTML;
+        }
       </script>
     </section>
   </body>
